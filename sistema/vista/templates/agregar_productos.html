@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agregar Producto</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="/static/style.css"/>
+
+ 
+</head>
+<body>
+
+  <div class="container">
+    <a href="/consulta_inventario" class="back-link">
+      <i class="fa-solid fa-arrow-left"></i> Regresar
+    </a>
+
+    <div class="form-container">
+      <h1><i class="fa-solid fa-box-open"></i> Agregar Producto</h1>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <form action="/agregar_productos" method="post">
+        <label for="nombre_producto"><i class="fa-solid fa-box"></i> Descripción del Producto:</label>
+        <input type="text" id="nombre_producto" name="nombre_producto" required>
+
+        <label for="tipo"><i class="fa-solid fa-tags"></i> Tipo:</label>
+        <input type="text" id="tipo" name="tipo" required>
+
+        <label for="precio_venta"><i class="fa-solid fa-dollar-sign"></i> Precio:</label>
+        <input type="text" id="precio_venta" name="precio_venta" required>
+
+        <label for="existencia"><i class="fa-solid fa-cubes"></i> Existencia:</label>
+        <input type="text" id="existencia" name="existencia" required>
+
+        <input type="submit" class="btn btn-primary" value="Aceptar">
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

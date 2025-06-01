@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Consulta de Usuarios</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="/static/style.css"/>
+
+ 
+</head>
+<body>
+
+  <div class="container">
+    <a href="/menu" class="back-link">
+      <i class="fa-solid fa-arrow-left"></i> Menú principal
+    </a>
+
+    <h1><i class="fa-solid fa-users"></i> Lista de Usuarios</h1>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID Usuario</th>
+          <th>Nombre</th>
+          <th>Apellido Paterno</th>
+          <th>Apellido Materno</th>
+          <th>Edad</th>
+          <th>Perfil</th>
+          <th>Comisión</th>
+          <th>Contraseña</th>
+          <th>Teléfono</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for usuario in datos %}
+        <tr>
+          <td>{{ usuario[0] }}</td>
+          <td>{{ usuario[1] }}</td>
+          <td>{{ usuario[2] }}</td>
+          <td>{{ usuario[3] }}</td>
+          <td>{{ usuario[4] }}</td>
+          <td>{{ usuario[5] }}</td>
+          <td>{{ usuario[6] }}</td>
+          <td>{{ usuario[7] }}</td>
+          <td>{{ usuario[8] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="action-links">
+      <a href="/agregar_usuarios"><i class="fa-solid fa-user-plus"></i> Agregar Usuario</a>
+      <a href="/eliminar_usuario"><i class="fa-solid fa-user-minus"></i> Eliminar Usuario</a>
+      <a href="/buscar_usuario"><i class="fa-solid fa-user-pen"></i> Modificar Usuario</a>
+    </div>
+  </div>
+
+</body>
+</html>

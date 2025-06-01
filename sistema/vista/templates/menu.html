@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú Principal</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/static/style.css">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #e5edf8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .menu-container {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #2563eb;
+      font-weight: 700;
+      margin-bottom: 30px;
+    }
+
+    .alert-success {
+      background-color: #d1fae5;
+      color: #065f46;
+      border-left: 5px solid #16a34a;
+    }
+
+    .menu-link {
+      display: block;
+      background-color: #f1f5f9;
+      margin: 10px 0;
+      padding: 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: #2563eb;
+      font-weight: 600;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .menu-link:hover {
+      background-color: #dbeafe;
+    }
+
+    .menu-link i {
+      margin-right: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="menu-container">
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <h1><i class="fa-solid fa-shop"></i> Menú Principal</h1>
+
+    <a href="/agregar_venta" class="menu-link">
+      <i class="fa-solid fa-cart-plus"></i> Generar Venta
+    </a>
+
+    <a href="/consulta_inventario" class="menu-link">
+      <i class="fa-solid fa-boxes-stacked"></i> Inventario
+    </a>
+
+    <a href="/usuarios" class="menu-link">
+      <i class="fa-solid fa-users"></i> Usuarios
+    </a>
+
+    <a href="/reporte_venta" class="menu-link">
+      <i class="fa-solid fa-chart-line"></i> Reporte de Ventas
+    </a>
+
+    <a href="/logout" class="menu-link">
+      <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
+    </a>
+  </div>
+</body>
+</html>

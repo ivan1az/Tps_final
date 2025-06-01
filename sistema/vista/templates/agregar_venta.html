@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agregar Venta</title>
+
+  <!-- Bootstrap (opcional) -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Estilos personalizados -->
+  <link rel="stylesheet" href="/static/style.css">
+
+ <style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f2f5;
+    color: #2c3e50;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+  max-width: 1100px;
+  margin: 40px auto;
+  background: #f8edf7; /* Lila muy suave */
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+  .form-grid-3, .form-grid-4 {
+    display: grid;
+    gap: 20px;
+  }
+
+  .form-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .form-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  fieldset {
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    background-color: #f9fafb;
+    margin-bottom: 30px;
+  }
+
+  label {
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  input[type="text"],
+  select {
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+  }
+
+  input[type="submit"], button {
+    padding: 12px 20px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  input[type="submit"]:hover, button:hover {
+    background-color: #2563eb;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f8d3f1;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+
+  
+  th, td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f6c6e6;
+  }
+
+  th {
+  background-color: #d5c1eb;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+tr:hover {
+  background-color: #fad9f5;
+}
+
+  .alert {
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  .alert-success {
+    background-color: #d1fae5;
+    color: #065f46;
+    border-left: 5px solid #16a34a;
+  }
+
+  .alert-danger {
+    background-color: #fee2e2;
+    color: #7f1d1d;
+    border-left: 5px solid #dc2626;
+  }
+
+  .fa {
+    margin-right: 6px;
+  }
+
+  a {
+    color: #3b82f6;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+  <p><a href="{{url_for('menu')}}"><i class="fa-solid fa-arrow-left"></i> Regresar</a></p>
+  <h1><i class="fa-solid fa-cart-plus"></i> Agregar Venta</h1>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form action="/agregar_venta" method="post" onsubmit="prepareProducts()" class="venta-form">
+    
+    <fieldset>
+      <legend><i class="fa-solid fa-id-card"></i> Datos Generales</legend>
+      <div class="form-grid-3">
+        <div class="form-group">
+          <label for="Nacionalidad"><i class="fa-solid fa-flag"></i> Nacionalidad:</label>
+          <input type="text" id="Nacionalidad" name="Nacionalidad">
+        </div>
+        <div class="form-group">
+          <label for="idvendedor"><i class="fa-solid fa-user"></i> Vendedor:</label>
+          <input type="text" id="idvendedor" name="idvendedor">
+        </div>
+        <div class="form-group">
+          <label for="fecha_venta"><i class="fa-solid fa-calendar"></i> Fecha Venta:</label>
+          <input type="text" id="fecha_venta" name="fecha_venta">
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><i class="fa-solid fa-box"></i> Producto</legend>
+      <div class="form-grid-4">
+        <div class="form-group">
+          <label for="nombre_producto"><i class="fa-solid fa-box-open"></i> Descripción:</label>
+          <input type="text" id="nombre_producto">
+        </div>
+        <div class="form-group">
+          <label for="precio_venta"><i class="fa-solid fa-dollar-sign"></i> Precio:</label>
+          <input type="text" id="precio_venta">
+        </div>
+        <div class="form-group">
+          <label for="tipo"><i class="fa-solid fa-shirt"></i> Talla:</label>
+          <input type="text" id="tipo">
+        </div>
+        <div class="form-group">
+          <label for="cantidad_vendida"><i class="fa-solid fa-sort-numeric-up"></i> Cantidad:</label>
+          <input type="text" id="cantidad_vendida">
+        </div>
+      </div>
+      <button type="button" class="btn btn-info" onclick="agregarProducto()">
+        <i class="fa-solid fa-plus"></i> Agregar Producto
+      </button>
+    </fieldset>
+
+    <h3><i class="fa-solid fa-list"></i> Productos añadidos</h3>
+    <table class="table table-bordered" id="productosTabla">
+      <thead>
+        <tr>
+          <th>Descripción</th>
+          <th>Precio</th>
+          <th>Talla</th>
+          <th>Cantidad</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <input type="hidden" name="productos" id="productosInput">
+
+    <div class="buttons">
+      <input type="submit" class="btn btn-success" value="Aceptar">
+    </div>
+
+  </form>
+</div>
+
+<script>
+  const productos = [];
+
+  function agregarProducto() {
+    const nombre = document.getElementById("nombre_producto").value;
+    const precio = document.getElementById("precio_venta").value;
+    const talla = document.getElementById("tipo").value;
+    const cantidad = document.getElementById("cantidad_vendida").value;
+
+    if (nombre && precio && talla && cantidad) {
+      const producto = { nombre, precio, talla, cantidad };
+      productos.push(producto);
+
+      const tabla = document.querySelector("#productosTabla tbody");
+      const fila = document.createElement("tr");
+      fila.innerHTML = `<td>${nombre}</td><td>${precio}</td><td>${talla}</td><td>${cantidad}</td>`;
+      tabla.appendChild(fila);
+
+      // Limpiar campos
+      document.getElementById("nombre_producto").value = "";
+      document.getElementById("precio_venta").value = "";
+      document.getElementById("tipo").value = "";
+      document.getElementById("cantidad_vendida").value = "";
+    } 
+  }
+
+  function prepareProducts() {
+    document.getElementById("productosInput").value = JSON.stringify(productos);
+  }
+</script>
+
+</body>
+</html>

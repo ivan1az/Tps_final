@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulta de Inventario</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/static/style.css">
+
+
+  
+</head>
+<body>
+
+  <div class="container">
+    <a href="/menu" class="btn btn-link" style="padding-left: 0;">
+      <i class="fa-solid fa-arrow-left"></i> Regresar al Menú principal
+    </a>
+
+    <h1><i class="fa-solid fa-boxes-stacked"></i> Lista de Inventario</h1>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>ID Producto</th>
+          <th>Nombre Producto</th>
+          <th>Tipo</th>
+          <th>Precio Venta</th>
+          <th>Existencia</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for id_producto, nombre_producto, tipo, precio_venta, existencia in datos %}
+        <tr>
+          <td>{{ id_producto }}</td>
+          <td>{{ nombre_producto }}</td>
+          <td>{{ tipo }}</td>
+          <td>{{ precio_venta }}</td>
+          <td>{{ existencia }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+   <div class="nav-links" style="margin-top: 30px;">
+  <a href="/agregar_productos" style="margin-right: 20px;">
+    <i class="fa-solid fa-plus"></i> Agregar Productos
+  </a>
+  <a href="/eliminar_producto" style="margin-right: 20px;">
+    <i class="fa-solid fa-trash"></i> Eliminar Productos
+  </a>
+  <a href="/buscar_producto">
+    <i class="fa-solid fa-pen-to-square"></i> Modificar Productos
+  </a>
+</div>
+
+  </div>
+
+</body>
+</html>

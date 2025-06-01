@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Buscar Empleado</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="/static/style.css"/>
+
+  
+</head>
+<body>
+
+  <div class="container">
+    <a href="{{ url_for('usuarios') }}" class="back-link">
+      <i class="fa-solid fa-arrow-left"></i> Regresar
+    </a>
+
+    <div class="form-container">
+      <h1><i class="fa-solid fa-magnifying-glass"></i> Buscar Empleado</h1>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <form action="/buscar_usuario" method="post">
+        <label for="id_usuario">ID del Usuario:</label>
+        <input type="text" id="id_usuario" name="id_usuario" required>
+
+        <input type="submit" class="btn btn-primary" value="Buscar">
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Consulta de Ventas</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="/static/style.css"/>
+
+
+    
+  
+</head>
+<body>
+
+  <div class="container">
+    <a href="/menu" class="back-link">
+      <i class="fa-solid fa-arrow-left"></i> Menú principal
+    </a>
+
+    <h1><i class="fa-solid fa-list"></i> Lista de Productos Vendidos</h1>
+    <form action="/descargar_reporte" method="POST">
+    <button type="submit" class="btn btn-success">
+      <i class="fa-solid fa-file-arrow-down"></i> Descargar Reporte
+    </button>
+    </form>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID Venta</th>
+          <th>Nombre Producto</th>
+          <th>Precio Venta</th>
+          <th>Tipo</th>
+          <th>Fecha Venta</th>
+          <th>Cantidad Vendida</th>
+          <th>ID Vendedor</th>
+          <th>Descuento</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for id_venta, nombre_producto, precio_venta, tipo, fecha_venta, cantidad_vendida, idVendedor, Descuento in datos %}
+        <tr>
+          <td>{{ id_venta }}</td>
+          <td>{{ nombre_producto }}</td>
+          <td>${{ precio_venta }}</td>
+          <td>{{ tipo }}</td>
+          <td>{{ fecha_venta }}</td>
+          <td>{{ cantidad_vendida }}</td>
+          <td>{{ idVendedor }}</td>
+          <td>{{ Descuento }}%</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>

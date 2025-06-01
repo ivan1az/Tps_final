@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Eliminar Empleado</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="/static/style.css"/>
+
+</head>
+<body>
+
+  <div class="container">
+    <a href="{{ url_for('usuarios') }}" class="back-link">
+      <i class="fa-solid fa-arrow-left"></i> Regresar
+    </a>
+
+    <div class="form-container">
+      <h1><i class="fa-solid fa-user-minus"></i> Eliminar Empleado</h1>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <form action="/eliminar_usuario" method="post" onsubmit="return confirmarEliminacion()">
+        <label for="id_empleado">ID del Empleado:</label>
+        <input type="text" id="id_empleado" name="id_empleado" required>
+
+        <input type="submit" class="btn btn-danger" value="Eliminar">
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function confirmarEliminacion() {
+      let idEmpleado = document.getElementById("id_empleado").value;
+      return confirm("¿Estás seguro de que deseas eliminar al empleado con ID " + idEmpleado + "?");
+    }
+  </script>
+
+</body>
+</html>
